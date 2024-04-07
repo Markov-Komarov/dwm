@@ -1,7 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 7;
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -37,6 +38,7 @@ static const Rule rules[] = {
 	{ "Gimp",            NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "mercury-browser", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "kitty",           NULL,     NULL,           0,         0,          1,           0,        -1 },
+  { "anki",            NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,              NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -72,8 +74,8 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_w,      spawn,          SHCMD ("firejail mercury-browser")},
-	{ MODKEY,                       XK_e,      spawn,          SHCMD ("thunar")},
+	{ MODKEY,                       XK_w,      spawn,          SHCMD ("thorium-browser-avx2")},
+	{ MODKEY,                       XK_e,      spawn,          SHCMD ("pcmanfm")},
   { 0,                            0x1008ff11, spawn,         SHCMD ("pamixer -d 2 -u")},
 	{ 0,                            0x1008ff12, spawn,         SHCMD ("pamixer -t")},
 	{ 0,                            0x1008ff13, spawn,         SHCMD ("pamixer -i 2 -u")},
@@ -99,6 +101,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
